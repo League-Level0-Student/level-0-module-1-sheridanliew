@@ -14,7 +14,7 @@ import org.jointheleague.graphical.robot.Robot;
 	public class RobotInSpace implements KeyEventDispatcher {
 		
 	Robot rob = new Robot("mini");
-	
+
 	/*  
 	  Make the Robot move around the screen when the arrow keys are pressed... 
 	  
@@ -22,19 +22,32 @@ import org.jointheleague.graphical.robot.Robot;
 	  
 	 */
 
-	private void moveRobot(int keyPressed) {
+	private void moveRobot(int keyPressed) throws InterruptedException {
 	    // 2. Print out the keyPressed variable and write down the numbers for each arrow key
-
+System.out.println(keyPressed);
 	    // 3. If the up arrow is pressed, move the Robot up the screen.
-
+if(keyPressed==38) {
+	rob.microMove(5);
+	rob.setAngle(0);
+}
 	    // 4. If the down arrow is pressed, move the Robot down.
-
+if (keyPressed==40) {
+	rob.microMove(5);
+	rob.setAngle(180);
+}
 	    // 5. If the left arrow is pressed, make the Robot go left.
-	   
+if(keyPressed==37) {
+	rob.microMove(5);
+	rob.setAngle(270);
+}
 	    // 6. If right is pressed, move the Robot right.
-	    
+if(keyPressed==39) {
+	rob.microMove(5);
+	rob.setAngle(90);
+}
+}
 	    // 7. Run your program and move the Robot to RD-2D for a surprise! 
-	}
+	
 
 	private void checkIfR2D2Found() throws Exception {
 	    int robotLocationX = rob.getX();
@@ -58,7 +71,12 @@ import org.jointheleague.graphical.robot.Robot;
 
 	public boolean dispatchKeyEvent(KeyEvent e) {
 	    if (e.getID() == KeyEvent.KEY_PRESSED) {
-	        moveRobot(e.getKeyCode());
+	        try {
+				moveRobot(e.getKeyCode());
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	        try {
 	            checkIfR2D2Found();
 	        } catch (Exception exception) {
